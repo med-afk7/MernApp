@@ -17,6 +17,9 @@ app.use(express.json()) // helps us get the request body
 
 app.use(morgan('tiny'));
 
+app.use(express.json());
+
+
 
 //route
 
