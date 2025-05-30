@@ -21,10 +21,7 @@ const UserSchema = new Schema({
 UserSchema.statics.signup = async function (email , password){
 
     //email validation 
-const exists = await this.findOne({email})
-if(exists){
-    throw Error('Email already in use ')
-}
+
 
 if(!email || !password){
     throw Error ('All fields must be filled ')
@@ -38,6 +35,12 @@ if(!validator.isEmail(email)){
 if(!validator.isStrongPassword(password)){
     throw Error ('password not strong enough')
 }
+
+const exists = await this.findOne({email})
+if(exists){
+    throw Error('Email already in use ')
+}
+
 
 
 
@@ -64,7 +67,7 @@ if(!user){
     throw Error('Incorrect email')
 }
 
-const match = await bcrypt.compare(password ,user.password)
+const match = await bcrypt.compare(password , user.password)
 if(!match){
     throw Error('Password is incorrect ')
 }
