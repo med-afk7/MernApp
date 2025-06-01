@@ -18,7 +18,10 @@ app.use(express.json()) // helps us get the request body
 
 app.use(morgan('tiny'));
 
-app.use(express.json());
+app.use((req, res, next) => {
+  console.log(req.path, req.method)
+  next()
+})
 
 
 
